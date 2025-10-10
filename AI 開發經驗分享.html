@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 開發經驗分享</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .tab-btn.active {
+            background-color: #3b82f6; /* bg-blue-600 */
+            color: #ffffff; /* text-white */
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b; /* slate-800 */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569; /* slate-600 */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b; /* slate-500 */
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200 antialiased">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-white mb-2">資深工程師 AI 開發經驗分享</h1>
+            <p class="text-slate-400">內部技術研討會</p>
+        </header>
+
+        <div class="bg-slate-800 rounded-2xl shadow-2xl overflow-hidden">
+            <!-- Tab Buttons -->
+            <div class="border-b border-slate-700">
+                <nav class="flex flex-wrap -mb-px" aria-label="Tabs">
+                    <button class="tab-btn active text-sm md:text-base font-medium text-center text-slate-300 py-3 px-4 rounded-tl-lg border-b-2 border-transparent hover:text-white hover:border-slate-500 transition-all duration-200" data-tab="tab1">傳統 vs 最新AI開發</button>
+                    <button class="tab-btn text-sm md:text-base font-medium text-center text-slate-300 py-3 px-4 border-b-2 border-transparent hover:text-white hover:border-slate-500 transition-all duration-200" data-tab="tab2">AI開發的挑戰</button>
+                    <button class="tab-btn text-sm md:text-base font-medium text-center text-slate-300 py-3 px-4 border-b-2 border-transparent hover:text-white hover:border-slate-500 transition-all duration-200" data-tab="tab3">如何命令AI</button>
+                    <button class="tab-btn text-sm md:text-base font-medium text-center text-slate-300 py-3 px-4 border-b-2 border-transparent hover:text-white hover:border-slate-500 transition-all duration-200" data-tab="tab4">資深工程師的盲點</button>
+                    <button class="tab-btn text-sm md:text-base font-medium text-center text-slate-300 py-3 px-4 border-b-2 border-transparent hover:text-white hover:border-slate-500 transition-all duration-200" data-tab="tab5">時間效率的權衡</button>
+                </nav>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="p-6 md:p-8 min-h-[400px]">
+                <!-- Tab 1: 傳統 vs 最新AI開發 -->
+                <div id="tab1" class="tab-content active animate-fade-in">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Traditional AI Development -->
+                        <div class="bg-slate-900/50 p-6 rounded-lg border border-slate-700">
+                            <h3 class="text-xl font-bold text-cyan-400 mb-4">傳統 AI 開發 (Prompt-Driven)</h3>
+                            <p class="text-slate-400 mb-4 text-sm">以 Cursor IDE 等工具，透過 Prompt 驅動開發。</p>
+                            <ul class="space-y-3 text-slate-300">
+                                <li class="flex items-start"><svg class="w-5 h-5 mr-2 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg><span><strong class="font-semibold">小範圍修改：</strong> 適合針對特定函式或區塊進行優化。</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 mr-2 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg><span><strong class="font-semibold">複雜度低：</strong> 處理邏輯相對單純的任務。</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 mr-2 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg><span><strong class="font-semibold">新舊專案兼用：</strong> 對既有程式碼庫的侵入性低。</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 mr-2 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg><span><strong class="font-semibold">模型要求低：</strong> 一般的語言模型即可勝任。</span></li>
+                            </ul>
+                        </div>
+                        <!-- SDD Development -->
+                        <div class="bg-slate-900/50 p-6 rounded-lg border border-slate-700">
+                            <h3 class="text-xl font-bold text-violet-400 mb-4">最新 SDD 開發 (Spec-Driven)</h3>
+                            <p class="text-slate-400 mb-4 text-sm">以 Github Copilot Workspace, Speakeasy 等工具，由規格文件驅動開發。</p>
+                            <ul class="space-y-3 text-slate-300">
+                                <li class="flex items-start"><svg class="w-5 h-5 mr-2 text-violet-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg><span><strong class="font-semibold">適合新專案：</strong> 從零開始建立，最能發揮其優勢。</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 mr-2 text-violet-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg><span><strong class="font-semibold">大範圍開發：</strong> 可一次生成整個模組或系統架構。</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 mr-2 text-violet-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg><span><strong class="font-semibold">規格先行：</strong> Spec 須持續維護，先有規格才有程式。</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 mr-2 text-violet-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg><span><strong class="font-semibold">模型要求高：</strong> 需要頂尖的大型語言模型支援。</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: AI開發的挑戰 -->
+                <div id="tab2" class="tab-content animate-fade-in">
+                    <h3 class="text-2xl font-bold text-amber-400 mb-6">AI 開發比想像中難</h3>
+                    <div class="space-y-6">
+                        <div class="bg-slate-900/50 p-6 rounded-lg border border-slate-700">
+                            <h4 class="text-lg font-semibold text-white mb-2">Side Project 的迷思</h4>
+                            <p class="text-slate-400">網路上的成功案例，大多是 Side Project。它們通常目標明確、容錯率高，更像是概念驗證 (PoC)。</p>
+                            <ul class="mt-3 list-disc list-inside text-slate-300">
+                                <li>不注重細節，達成主要功能即可。</li>
+                                <li>需求邊界模糊，開發者可自行決定範疇。</li>
+                                <li>因此，網路上的 "成功率" 很高，容易讓人低估實務難度。</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-900/50 p-6 rounded-lg border border-slate-700">
+                            <h4 class="text-lg font-semibold text-white mb-2">真實客戶的需求</h4>
+                            <p class="text-slate-400">客戶的需求與 Side Project 完全不同，充滿了商業邏輯的細節與限制。</p>
+                             <ul class="mt-3 list-disc list-inside text-slate-300">
+                                <li><strong class="text-amber-400">極度注重細節：</strong> 錯誤的計算、不符預期的 UI/UX 都無法被接受。</li>
+                                <li><strong class="text-amber-400">複雜的邊界條件：</strong> 需要處理各種例外情況、權限控管、資料驗證。</li>
+                                <li><strong class="text-amber-400">隱性知識：</strong> 許多商業規則並未文件化，存在於資深員工的腦中。</li>
+                                <li>這使得導入 AI 開發的實際困難度遠高於預期。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: 如何命令AI -->
+                <div id="tab3" class="tab-content animate-fade-in">
+                    <h3 class="text-2xl font-bold text-emerald-400 mb-6">該怎麼命令 AI？</h3>
+                    <p class="text-slate-400 mb-6">指令的清晰度決定了 AI 的產出品質。AI 不是讀心術士，它需要結構化的資訊。</p>
+                    <div class="space-y-4">
+                        <div class="bg-green-500/10 p-4 rounded-lg border border-green-500/30">
+                            <h4 class="font-semibold text-green-300">✓ 明確的指令</h4>
+                            <p class="text-slate-300 mt-1">AI 可以直接理解並執行，產出最準確。</p>
+                            <code class="block bg-slate-900 p-2 rounded mt-2 text-sm text-slate-200">幫我計算商品的 "進貨價 - 銷貨價"</code>
+                        </div>
+                        <div class="bg-yellow-500/10 p-4 rounded-lg border border-yellow-500/30">
+                            <h4 class="font-semibold text-yellow-300">~ 不明確但AI可推敲的指令</h4>
+                            <p class="text-slate-300 mt-1">AI 需要利用其訓練資料中的知識進行推斷，結果可能正確，但有風險。</p>
+                            <code class="block bg-slate-900 p-2 rounded mt-2 text-sm text-slate-200">幫我計算商品的 "毛利"</code>
+                        </div>
+                        <div class="bg-red-500/10 p-4 rounded-lg border border-red-500/30">
+                            <h4 class="font-semibold text-red-300">✗ 過於籠統、包含內部術語的命令</h4>
+                            <p class="text-slate-300 mt-1">AI 無法理解公司內部的專有名詞或商業流程，會導致產出完全錯誤或無關的程式碼。</p>
+                            <code class="block bg-slate-900 p-2 rounded mt-2 text-sm text-slate-200">幫我檢查 "好享券" 的算錢邏輯</code>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab 4: 資深工程師的盲點 (REVISED) -->
+                <div id="tab4" class="tab-content animate-fade-in">
+                    <h3 class="text-2xl font-bold text-emerald-400 mb-4 text-center">把 AI 當成你的新同事</h3>
+                    <p class="text-slate-400 mb-8 max-w-2xl mx-auto text-center">你很懂系統，但 AI 對你的專案一無所知。想像它是一位聰明、學習力強、但完全沒有背景知識的新人。要讓它幫上忙，你必須先給它完整的「入職培訓」。</p>
+                    
+                    <div class="space-y-6">
+                        <!-- Step 1: Explain Jargon -->
+                        <div class="bg-slate-900/50 p-6 rounded-lg border border-slate-700 flex flex-col md:flex-row items-center gap-6">
+                            <div class="text-emerald-400 flex-shrink-0">
+                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V7a2 2 0 012-2h2m8-4H5a2 2 0 00-2 2v10a2 2 0 002 2h11l4 4V7a2 2 0 00-2-2z" /></svg>
+                            </div>
+                            <div class="flex-grow w-full">
+                                <h4 class="font-semibold text-white text-lg">第一步：教它「行話」</h4>
+                                <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                    <div class="bg-slate-800 p-3 rounded">
+                                        <p class="font-semibold text-slate-300">你說：</p>
+                                        <p class="text-slate-400">"幫我檢查「好享券」的算錢邏輯。"</p>
+                                    </div>
+                                    <div class="bg-amber-900/50 p-3 rounded">
+                                        <p class="font-semibold text-amber-300">AI 理解為：</p>
+                                        <p class="text-slate-400">"幫我檢查「???」的算錢邏輯。"</p>
+                                    </div>
+                                </div>
+                                <p class="mt-3 text-sm text-emerald-300 bg-emerald-500/10 p-2 rounded-md"><strong>解法：</strong> 必須先清楚定義「好享券」是什麼、它的規則、以及相關的商業術語。</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Provide Process Docs -->
+                        <div class="bg-slate-900/50 p-6 rounded-lg border border-slate-700 flex flex-col md:flex-row items-center gap-6">
+                             <div class="text-amber-400 flex-shrink-0">
+                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                             </div>
+                             <div class="flex-grow w-full">
+                                <h4 class="font-semibold text-white text-lg">第二步：給它「地圖」</h4>
+                                 <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                    <div class="bg-slate-800 p-3 rounded">
+                                        <p class="font-semibold text-slate-300">你的認知：</p>
+                                        <p class="text-slate-400">"結帳流程的核心邏輯在 BillingService。"</p>
+                                    </div>
+                                    <div class="bg-amber-900/50 p-3 rounded">
+                                        <p class="font-semibold text-amber-300">AI 的視角：</p>
+                                        <p class="text-slate-400">"眼前有數百個檔案，該從何看起？"</p>
+                                    </div>
+                                </div>
+                                <p class="mt-3 text-sm text-emerald-300 bg-emerald-500/10 p-2 rounded-md"><strong>解法：</strong> 提供流程圖、規格文件或使用者故事，讓 AI 了解系統的全貌與程式碼的互動關係。</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Provide DB Schema -->
+                        <div class="bg-slate-900/50 p-6 rounded-lg border border-slate-700 flex flex-col md:flex-row items-center gap-6">
+                             <div class="text-emerald-400 flex-shrink-0">
+                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 0v10c0 2.21-3.582 4-8 4s-8-1.79-8-4V7" /></svg>
+                            </div>
+                            <div class="flex-grow w-full">
+                                <h4 class="font-semibold text-white text-lg">第三步：給它「藍圖」</h4>
+                                 <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                    <div class="bg-slate-800 p-3 rounded">
+                                        <p class="font-semibold text-slate-300">你的常識：</p>
+                                        <p class="text-slate-400">"用 user_id 就能關聯到 profiles 表。"</p>
+                                    </div>
+                                    <div class="bg-amber-900/50 p-3 rounded">
+                                        <p class="font-semibold text-amber-300">AI 的疑問：</p>
+                                        <p class="text-slate-400">"user_id 是什麼？profiles 表在哪？"</p>
+                                    </div>
+                                </div>
+                                <p class="mt-3 text-sm text-emerald-300 bg-emerald-500/10 p-2 rounded-md"><strong>解法：</strong> 提供 Database Schema，解釋資料表之間的關聯、索引和各欄位的業務意義。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 5: 時間效率的權衡 -->
+                <div id="tab5" class="tab-content animate-fade-in">
+                    <h3 class="text-2xl font-bold text-sky-400 mb-6">Prompt 的完整度 vs. 時間效率</h3>
+                    <p class="text-slate-400 mb-6">在追求開發速度時，我們需要在 "撰寫完美 Prompt" 和 "快速產出後手動修改" 之間找到平衡點。</p>
+                    <div class="relative border-l-2 border-slate-700 ml-3 py-4">
+                        <div class="mb-8 ml-8">
+                            <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-600 rounded-full -left-3 ring-8 ring-slate-800">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            </span>
+                            <h4 class="text-lg font-semibold text-white">情境一：撰寫 100% 完整的 Prompt</h4>
+                            <p class="text-sm font-normal text-slate-400">花費較多時間提供所有細節、範例、邊界條件。</p>
+                            <ul class="mt-2 list-disc list-inside text-slate-300">
+                                <li><strong class="text-green-400">優點：</strong> AI 產出的程式碼準確率極高，幾乎無需修改。</li>
+                                <li><strong class="text-red-400">缺點：</strong> 前期溝通成本高，對於簡單任務可能殺雞用牛刀。</li>
+                            </ul>
+                        </div>
+                        <div class="ml-8">
+                            <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-600 rounded-full -left-3 ring-8 ring-slate-800">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            </span>
+                            <h4 class="text-lg font-semibold text-white">情境二：撰寫 80% 完整的 Prompt，再手動補全</h4>
+                            <p class="text-sm font-normal text-slate-400">快速給出核心需求，讓 AI 產出基礎框架，再由工程師手動調整細節。</p>
+                            <ul class="mt-2 list-disc list-inside text-slate-300">
+                                <li><strong class="text-green-400">優點：</strong> 啟動速度快，適合敏捷開發，能快速驗證想法。</li>
+                                <li><strong class="text-red-400">缺點：</strong> AI 可能會誤解需求，後續修改成本可能高於預期。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-6 ml-8 text-sky-300 bg-sky-500/10 border border-sky-500/20 p-4 rounded-lg">
+                        <p><strong class="font-semibold">結論：</strong> 最佳策略取決於任務的複雜性。對於核心且複雜的業務邏輯，應投入時間撰寫詳細 Prompt；對於通用或輔助性功能，採用 80% + 手動修改的方式可能更具效率。</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <footer class="text-center mt-8 text-slate-500 text-sm">
+            <p>&copy; 2024 Your Company Name. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Deactivate all tabs and content
+                    tabs.forEach(item => item.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    // Activate the clicked tab and its content
+                    const targetTab = tab.getAttribute('data-tab');
+                    document.getElementById(targetTab).classList.add('active');
+                    tab.classList.add('active');
+                });
+            });
+        });
+
+        // Add a simple fade-in animation class with JS to avoid CSS clutter
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .animate-fade-in {
+                animation: fadeIn 0.5s ease-out forwards;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+</html>
+
